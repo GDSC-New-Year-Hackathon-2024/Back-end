@@ -7,7 +7,8 @@
 #    username: sa       # H2 DB 접속 ID (사용자 지정)
 #    password:       # H2 DB 접속 PW (사용자 지정)
 spring:
-  datasource: jdbc:mysql://34.66.120.50/Lustle?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
+  datasource:
+    url: jdbc:mysql://34.66.120.50/Lustle?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
     username: root
     password: 1234
     driver-class-name: com.mysql.cj.jdbc.Driver
