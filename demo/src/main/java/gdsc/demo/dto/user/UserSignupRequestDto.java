@@ -4,6 +4,8 @@ import gdsc.demo.domain.User;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.util.UUID;
+
 @Getter
 public class UserSignupRequestDto {
 
@@ -34,6 +36,7 @@ public class UserSignupRequestDto {
                 .gender(gender)
                 .mbti(mbti)
                 .nickname(nickname)
+                .uniqueNumber(UUID.randomUUID().toString())
                 .totalPointUseAble(totalPointUserAble)
                 .build();
     }

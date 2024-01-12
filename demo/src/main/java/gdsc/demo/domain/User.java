@@ -14,7 +14,7 @@ public class User {
 
     @Id
     @Column(name = "user_id")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
@@ -42,7 +42,10 @@ public class User {
     private int totalPointUseAble = 0;
 
     @Enumerated(EnumType.STRING)
-    private Role role;
+    private Role role = Role.USER;
+
+    @Column(nullable = true, unique = true)
+    private String uniqueNumber;
 
     public boolean checkPassword(PasswordEncoder passwordEncoder, String inputPassword) {
         return passwordEncoder.matches(inputPassword, this.password);

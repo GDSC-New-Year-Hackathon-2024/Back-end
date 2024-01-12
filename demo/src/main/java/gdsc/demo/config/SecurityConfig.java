@@ -2,6 +2,7 @@ package gdsc.demo.config;
 
 import gdsc.demo.service.UserService;
 import jakarta.servlet.DispatcherType;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -22,6 +23,7 @@ import java.util.List;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
+@Slf4j
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity

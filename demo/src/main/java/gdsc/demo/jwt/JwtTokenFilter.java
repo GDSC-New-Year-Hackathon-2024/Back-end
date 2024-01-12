@@ -7,6 +7,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -17,6 +18,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 import java.util.List;
 
+@Slf4j
 @RequiredArgsConstructor
 public class JwtTokenFilter extends OncePerRequestFilter {
 
@@ -30,12 +32,14 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         //Header의 Authorization의 값이 비어있으면 => Jwt Token을 전송하지 않음 => 로그인 하지 않음
         if(authorizationHeader == null) {
             filterChain.doFilter(request, response);
+            log.info("토큰 비어있음");
             return;
         }
 
         //Header의 Authorization의 값이 'Bearer '로 시작하지 않으면 => 잘못된 토큰
         if(!authorizationHeader.startsWith("Bearer ")) {
             filterChain.doFilter(request, response);
+            log.info("토큰 시작 오류");
             return;
         }
 
@@ -45,6 +49,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         //전송받은 Jwt Token이 만료되었으면 => 다음 필터 진행(인증 X)
         if(JwtTokenUtil.isExpired(token, secretKey)) {
             filterChain.doFilter(request, response);
+            log.info("토큰 만료");
             return;
         }
 

@@ -66,7 +66,7 @@ public class CheckListService {
     }
 
     //기본키인 id로 체크리스트 조회
-    public List<CheckListResponseDto> findById(Long id) {
-        return checkListRepository.findById(id).stream().map(CheckListResponseDto::new).collect(Collectors.toList());
+    public CheckListResponseDto findById(Long id) {
+        return new CheckListResponseDto(checkListRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 체크리스트가 존재하지 않습니다.")));
     }
 }

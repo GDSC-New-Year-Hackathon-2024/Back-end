@@ -20,4 +20,12 @@ public class Content {
     @JoinColumn(name = "check_list_id")
     private CheckList checkList;
 
+    //해당 내용 달성 여부
+    private int isDone;
+
+    public void updateIsDone(int isDone) {
+        this.isDone = isDone;
+    }
+
+
 }
