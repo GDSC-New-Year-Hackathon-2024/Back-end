@@ -1,5 +1,6 @@
 package gdsc.demo.config;
 
+import gdsc.demo.jwt.JwtTokenFilter;
 import gdsc.demo.service.UserService;
 import jakarta.servlet.DispatcherType;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +16,7 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -86,6 +88,8 @@ public class SecurityConfig {
 //                        .defaultSuccessUrl("/view/dashboard", true)
 //                        .permitAll()
                 )
+                .addFilterBefore(new JwtTokenFilter(userService, secretKey), UsernamePasswordAuthenticationFilter.class)
+                //.authorizeHttpRequests()
                 .logout(withDefaults());
 
         return http.build();

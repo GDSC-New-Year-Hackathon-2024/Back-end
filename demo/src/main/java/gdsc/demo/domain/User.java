@@ -44,6 +44,9 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role = Role.USER;
 
+//    @OneToMany(mappedBy)
+//    private List<CheckList> checkLists;
+
     @Column(nullable = true, unique = true)
     private String uniqueNumber;
 
